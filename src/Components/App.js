@@ -9,14 +9,10 @@ import Login from "./Authentication/Login";
 import PrivateRoute from "./Authentication/PrivateRoute";
 import ForgotPassword from "./Authentication/ForgotPassword";
 import UpdateProfile from "./Authentication/UpdateProfile";
+import CenteredContainer from "./Authentication/CenteredContainer";
 
 function App() {
   return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}
-    >
-      <div className="w-100" style={{ maxWidth: "400px" }}>
         <Router>
           <AuthProvider>
             <Switch>
@@ -28,8 +24,6 @@ function App() {
             </Switch>
           </AuthProvider>
         </Router>
-      </div>
-    </Container>
   );
 }
 
