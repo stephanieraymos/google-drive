@@ -30,11 +30,14 @@ const AddFolderButton = () => {
                         type="text"
                         required
                         value={name}
-                        onChange={e => SVGAnimateTransformElement(e.target.value)}
+                        onChange={e => setName(e.target.value)}
                     />
                 </Form.Group>
             </Modal.Body>
-            <Modal.Footer></Modal.Footer>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={closeModal}>Close</Button>
+                <Button variant="success" type="submit">Add Folder</Button>
+            </Modal.Footer>
         </Form>
     </Modal>
     </>
