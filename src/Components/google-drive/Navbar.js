@@ -2,9 +2,9 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-const NavbarComponent = () => {
+const Navigation = () => {
   return (
-    <Navbar bg="light" expanded="sm">
+    <Navbar bg="light" expand="sm">
       <Navbar.Brand as={Link} to="/">
         Raymified Drive
       </Navbar.Brand>
@@ -17,4 +17,4 @@ const NavbarComponent = () => {
   );
 };
 
-export default Navbar;
+export default Navigation;

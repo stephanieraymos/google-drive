@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from "./Navbar"
+import Navigation from "./Navbar"
 const Dashboard = () => {
     return (
-        <Navbar>
+        <Navigation>
             
-        </Navbar>
+        </Navigation>
     )
 }
 
