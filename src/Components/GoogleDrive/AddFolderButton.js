@@ -20,11 +20,11 @@ const AddFolderButton = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     database.folders.add({
-    //   name: name,
+      name: name,
     //   parentId,
       userId: currentUser.uid,
     //   path,
-    //   createdAt,
+      createdAt: database.getCurrentTimeStamp()
     });
     setName("");
     closeModal();
