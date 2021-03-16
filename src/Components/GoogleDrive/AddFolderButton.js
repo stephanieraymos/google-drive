@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Modal, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
+import { database } from "../../firebase";
 
 const AddFolderButton = () => {
   const [open, setOpen] = useState(false);
@@ -16,7 +17,9 @@ const AddFolderButton = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    database.folders.add({
+      name: name,
+    });
     setName("");
     closeModal();
   };
