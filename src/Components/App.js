@@ -10,6 +10,7 @@ import PrivateRoute from "./Authentication/PrivateRoute";
 import ForgotPassword from "./Authentication/ForgotPassword";
 import UpdateProfile from "./Authentication/UpdateProfile";
 import CenteredContainer from "./Authentication/CenteredContainer";
+import Dashboard from "./GoogleDrive/Dashboard";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             <Switch>
 
               {/* Drive Routes */}
-
+              <PrivateRoute exact path="/" component={Dashboard} />
 
               {/* Profile Routes */}
               <PrivateRoute path="/user" component={Profile} />
@@ -28,7 +29,7 @@ function App() {
               <Route path="/signup" component={Signup} />
               <Route path="/login" component={Login} />
               <Route path="/forgot-password" component={ForgotPassword} />
-              
+
             </Switch>
           </AuthProvider>
         </Router>
