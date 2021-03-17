@@ -1,14 +1,30 @@
-import { useReducer } from "./react";
+import { useReducer, useEffect } from "./react";
 
-const reducer = () => {
+const ACTIONS = {
+  SELECT_FOLDER: "select-folder",
+};
 
- }
+const reducer = (state, { type, payload }) => {
+  switch (type) {
+    case ACTIONS.SELECT_FOLDER:
+      return {
+        folderId: payload.folderId,
+        folder: payload.folder,
+        childFiles: [],
+        childFolders: [],
+      };
+  }
+};
+
 export function useFolder(folderId = null, folder = null) {
   const [state, dispatch] = useReducer(reducer, {
-      folderId,
-      folder,
-      childFolder: [],
-      childFiles: []
+    folderId,
+    folder,
+    childFolder: [],
+    childFiles: [],
   });
 
+  useEffect(() => {
+    dispatch({ type: ACTIONS.SELECT_FOLDER, payload: { folderId, folder } }); //Reset folder details
+  }, [folderId, folder]);
 }
