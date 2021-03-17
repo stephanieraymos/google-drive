@@ -57,7 +57,11 @@ export function useFolder(folderId = null, folder = null) {
       .doc(folderId)
       .get()
       .then((doc) => {
-        console.log(doc);
+        const formattedDoc = {
+          id: doc.id,
+          ...doc.data()
+        }
+        console.log(formattedDoc);
       })
       .catch(() => {
         dispatch({ //If error getting current folder; get root instead
