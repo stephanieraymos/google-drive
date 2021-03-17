@@ -5,6 +5,12 @@ const ACTIONS = {
   UPDATE_FOLDER: "update-folder",
 };
 
+const ROOT_FOLDER = {
+  name: "Root",
+  id: null,
+  path: [],
+};
+
 const reducer = (state, { type, payload }) => {
   switch (type) {
     case ACTIONS.SELECT_FOLDER:
