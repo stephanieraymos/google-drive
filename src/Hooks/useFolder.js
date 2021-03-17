@@ -1,4 +1,6 @@
+import firebase from "firebase";
 import { useReducer, useEffect } from "react";
+import { database } from "../firebase";
 
 const ACTIONS = {
   SELECT_FOLDER: "select-folder",
@@ -43,14 +45,27 @@ export function useFolder(folderId = null, folder = null) {
   }, [folderId, folder]);
 
   useEffect(() => {
-    if (folderId === null) {
+    if (folderId == null) {
       //Not in a folder (in root: Dashboard)
       return dispatch({
         type: ACTIONS.UPDATE_FOLDER,
         payload: { folder: ROOT_FOLDER },
       });
     }
+
+    database.folders
+      .doc(folderId)
+      .get()
+      .then((doc) => {
+        console.log(doc);
+      })
+      .catch(() => {
+        dispatch({ //If error getting current folder; get root instead
+          type: ACTIONS.UPDATE_FOLDER,
+          payload: { folder: ROOT_FOLDER },
+        });
+      });
   }, [folderId]); //Updating folder vairable from folderId: anytime we pass a new id to the folder
 
-  return state
+  return state;
 }
