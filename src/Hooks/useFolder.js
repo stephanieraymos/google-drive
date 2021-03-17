@@ -13,6 +13,8 @@ const reducer = (state, { type, payload }) => {
         childFiles: [],
         childFolders: [],
       };
+    default:
+      return state;
   }
 };
 
@@ -27,4 +29,14 @@ export function useFolder(folderId = null, folder = null) {
   useEffect(() => {
     dispatch({ type: ACTIONS.SELECT_FOLDER, payload: { folderId, folder } }); //Reset folder details
   }, [folderId, folder]);
+
+  useEffect(() => {
+    if (folderId === null) {
+      //Not in a folder (in root: Dashboard)
+      return dispatch({
+        type: ACTIONS.UPDATE_FOLDER,
+        payload: { folder: ROOT_FOLDER },
+      });
+    }
+  }, [folderId]); //Updating folder vairable from folderId: anytime we pass a new id to the folder
 }
