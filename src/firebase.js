@@ -17,7 +17,10 @@ const firestore = app.firestore();
 export const database = {
   folders: firestore.collection("folders"),
   files: firestore.collection("files"),
-  getCurrentTimeStamp: firebase.firestore.FieldValue.serverTimestamp
+  formatDoc: (doc) => {
+    return { id: doc.id, ...doc.data() };
+  },
+  getCurrentTimeStamp: firebase.firestore.FieldValue.serverTimestamp,
 };
 export const auth = app.auth();
 export default app;
