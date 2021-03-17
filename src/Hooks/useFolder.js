@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "./react";
+import { useReducer, useEffect } from "react";
 
 const ACTIONS = {
   SELECT_FOLDER: "select-folder",
@@ -51,4 +51,6 @@ export function useFolder(folderId = null, folder = null) {
       });
     }
   }, [folderId]); //Updating folder vairable from folderId: anytime we pass a new id to the folder
+
+  return state
 }
