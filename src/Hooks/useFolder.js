@@ -2,6 +2,7 @@ import { useReducer, useEffect } from "./react";
 
 const ACTIONS = {
   SELECT_FOLDER: "select-folder",
+  UPDATE_FOLDER: "update-folder",
 };
 
 const reducer = (state, { type, payload }) => {
@@ -12,6 +13,11 @@ const reducer = (state, { type, payload }) => {
         folder: payload.folder,
         childFiles: [],
         childFolders: [],
+      };
+    case ACTIONS.UPDATE_FOLDER:
+      return {
+        ...state,
+        folder: payload.folder,
       };
     default:
       return state;
