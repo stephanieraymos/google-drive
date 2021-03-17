@@ -57,14 +57,11 @@ export function useFolder(folderId = null, folder = null) {
       .doc(folderId)
       .get()
       .then((doc) => {
-        const formattedDoc = {
-          id: doc.id,
-          ...doc.data()
-        }
-        console.log(formattedDoc);
+        console.log(database.formatDoc(doc));
       })
       .catch(() => {
-        dispatch({ //If error getting current folder; get root instead
+        dispatch({
+          //If error getting current folder; get root instead
           type: ACTIONS.UPDATE_FOLDER,
           payload: { folder: ROOT_FOLDER },
         });
