@@ -5,7 +5,7 @@ import { faFolderPlus } from "@fortawesome/free-solid-svg-icons";
 import { database } from "../../firebase";
 import { useAuth } from "../../Context/AuthContext";
 
-const AddFolderButton = (currentFolder) => {
+const AddFolderButton = ({ currentFolder }) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const { currentUser } = useAuth();
