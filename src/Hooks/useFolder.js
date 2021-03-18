@@ -74,8 +74,7 @@ export function useFolder(folderId = null, folder = null) {
         });
         console.log(database.formatDoc(doc));
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
         dispatch({
           //If error getting current folder; get root instead
           type: ACTIONS.UPDATE_FOLDER,
@@ -89,10 +88,10 @@ export function useFolder(folderId = null, folder = null) {
       .where("parentId", "==", folderId)
       .where("userId", "==", currentUser.uid)
       .orderBy("createdAt")
-      .onSnapshot((snapshot) => {
+      .onSnapshot(snapshot => {
         dispatch({
           type: ACTIONS.SET_CHILD_FOLDERS,
-          payload: { childFolders: snapshot.docs.map(database.formatDoc) },
+          payload: { childFolders: snapshot.docs.map(database.formatDoc) }
         });
       });
   }, [folderId, currentUser]);
