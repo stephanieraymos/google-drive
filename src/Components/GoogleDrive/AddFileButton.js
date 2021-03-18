@@ -34,7 +34,17 @@ const AddFileButton = ({ currentFolder }) => {
 
     uploadTask.on(
       "state_changed",
-      (snapshot) => {},
+      (snapshot) => {
+        const progress = snapshot.bytesTransferred / snapshot.totalBytes;
+        setUploadingFiles((prevUploadingFiles) => {
+          return prevUploadingFiles.map((file) => {
+            if (uploadingFiles.id === id) {
+              return { ...uploadingFiles, progress: progress };
+            }
+            return uploadFile;
+          });
+        });
+      },
       () => {},
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then((url) => {
