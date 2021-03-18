@@ -19,8 +19,8 @@ const Dashboard = () => {
       <Container fluid>
         <div className="d-flex align-items-center">
           <FolderBreadcrumbs currentFolder={folder} />
-          <AddFolderButton currentFolder={folder} />
           <AddFileButton currentFolder={folder} />
+          <AddFolderButton currentFolder={folder} />
         </div>
         {childFolders.length > 0 && (
           <div className="d-flex flex-wrap">
