@@ -95,7 +95,7 @@ const AddFileButton = ({ currentFolder }) => {
           type="file"
           onChange={handleUpload}
           style={{ opacity: 0, position: "absolute", left: "-9999px" }}
-        ></input>
+        />
       </label>
       {uploadingFiles.length > 0 &&
         ReactDOM.createPortal(
@@ -113,14 +113,14 @@ const AddFileButton = ({ currentFolder }) => {
                 onClose={() => {
                   setUploadingFiles((prevUploadingFiles) => {
                     return prevUploadingFiles.filter((uploadFile) => {
-                      return uploadFile.id != file.id; //If it doesn't = the current file then don't remove it; otherwise DO remove it
+                      return uploadFile.id !== file.id; //If it doesn't = the current file then don't remove it; otherwise DO remove it
                     });
                   });
                 }}
               >
                 <Toast.Header
                   closeButton={file.error}
-                  className="text-truncate w100 d-block"
+                  className="text-truncate w-100 d-block"
                 >
                   {file.name}
                 </Toast.Header>
