@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import { Toast, ProgressBar } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../Context/AuthContext";
 import { storage, database } from "../../firebase";
 import { ROOT_FOLDER } from "../../Hooks/useFolder";
+import { v4 as uuidv4 } from "uuid";
 
 const AddFileButton = ({ currentFolder }) => {
   const [uploadingFiles, setUploadingFiles] = useState([]);
@@ -13,11 +16,11 @@ const AddFileButton = ({ currentFolder }) => {
     const file = e.target.files[0];
     if (currentFolder == null || file == null) return;
 
-    setUploadingFiles(
-      ...prevUploadingFiles => [
-        ...prevUploadingFiles,
-        { id: id, name: file.name, progress: 0, error: false },
-      ])
+    const id = uuidv4();
+    setUploadingFiles((prevUploadingFiles) => [
+      ...prevUploadingFiles,
+      { id: id, name: file.name, progress: 0, error: false },
+    ]);
 
     const filePath =
       currentFolder === ROOT_FOLDER //If in root folder
@@ -48,14 +51,48 @@ const AddFileButton = ({ currentFolder }) => {
   };
 
   return (
-    <label className="btn btn-outline-success btn-sm m-0 mr-2">
-      <FontAwesomeIcon icon={faFileUpload} />
-      <input
-        type="file"
-        onChange={handleUpload}
-        style={{ opacity: 0, position: "absolute", left: "-9999px" }}
-      ></input>
-    </label>
+    <>
+      <label className="btn btn-outline-success btn-sm m-0 mr-2">
+        <FontAwesomeIcon icon={faFileUpload} />
+        <input
+          type="file"
+          onChange={handleUpload}
+          style={{ opacity: 0, position: "absolute", left: "-9999px" }}
+        ></input>
+      </label>
+      {uploadingFiles.length > 0 &&
+        ReactDOM.createPortal(
+          <div
+            style={{
+              position: "absolute",
+              bottom: "1rem",
+              right: "1rem",
+              maxWidth: "250px",
+            }}
+          >
+            {uploadingFiles.map((file) => {
+              <Toast key={file.id}>
+                <Toast.Header className="text-truncate w100 d-block">
+                  {file.name}
+                </Toast.Header>
+                <Toast.Body>
+                  <ProgressBar
+                    animated={!file.error}
+                    variant={file.error ? "danger" : "primary"}
+                    now={file.error ? 100 : file.progress * 100}
+                    label={
+                      file.error
+                        ? "Error"
+                        : `${Math.round(file.progress * 100)}%`
+                    }
+                  />
+                </Toast.Body>
+              </Toast>;
+            })}
+          </div>,
+          document.body
+        )}
+    </>
   );
 };
 
