@@ -47,6 +47,12 @@ const AddFileButton = ({ currentFolder }) => {
       },
       () => {},
       () => {
+        setUploadingFiles((prevUploadingFiles) => {
+          return prevUploadingFiles.filter((uploadFile) => {
+            return uploadFile.id !== id; //Then save it, otherwise remove it
+          });
+        });
+
         uploadTask.snapshot.ref.getDownloadURL().then((url) => {
           database.files.add({
             url: url,
