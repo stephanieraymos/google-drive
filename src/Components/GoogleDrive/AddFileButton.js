@@ -45,7 +45,16 @@ const AddFileButton = ({ currentFolder }) => {
           });
         });
       },
-      () => {},
+      () => {
+        setUploadingFiles((prevUploadingFiles) => {
+          return prevUploadingFiles.map((uploadFile) => {
+            if (uploadFile.id === id) {
+              return { ...uploadFile, error: true }; //If error in upload process; set error to true
+            }
+            return uploadFile;
+          });
+        });
+      },
       () => {
         setUploadingFiles((prevUploadingFiles) => {
           return prevUploadingFiles.filter((uploadFile) => {
@@ -87,7 +96,16 @@ const AddFileButton = ({ currentFolder }) => {
             }}
           >
             {uploadingFiles.map((file) => (
-              <Toast key={file.id}>
+              <Toast
+                key={file.id}
+                onClose={() => {
+                  setUploadingFiles((prevUploadingFiles) => {
+                    return prevUploadingFiles.filter((uploadFile) => {
+                      return uploadFile.id != file.id; //If it doesn't = the current file then don't remove it; otherwise DO remove it
+                    });
+                  });
+                }}
+              >
                 <Toast.Header
                   closeButton={file.error}
                   className="text-truncate w100 d-block"
