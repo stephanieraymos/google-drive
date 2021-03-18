@@ -1,11 +1,12 @@
 import firebase from "firebase";
 import { useReducer, useEffect } from "react";
 import { database } from "../firebase";
+import { useAuth } from "../Context/AuthContext";
 
 const ACTIONS = {
   SELECT_FOLDER: "select-folder",
   UPDATE_FOLDER: "update-folder",
-  SET_CHILD_FOLDERS: "set-child-folders"
+  SET_CHILD_FOLDERS: "set-child-folders",
 };
 
 const ROOT_FOLDER = {
@@ -43,9 +44,11 @@ export function useFolder(folderId = null, folder = null) {
   const [state, dispatch] = useReducer(reducer, {
     folderId,
     folder,
-    childFolder: [],
+    childFolders: [],
     childFiles: [],
   });
+
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     dispatch({ type: ACTIONS.SELECT_FOLDER, payload: { folderId, folder } }); //Reset folder details
@@ -88,9 +91,10 @@ export function useFolder(folderId = null, folder = null) {
       .onSnapshot(snapshot => {
         dispatch({
           type: ACTIONS.SET_CHILD_FOLDERS,
-          payload: { childFolders: snapshot.docs.map(database.formatDoc)}
-        })
-      })
+          payload: { childFolders: snapshot.docs.map(database.formatDoc) }
+        });
+      });
   }, [folderId, currentUser]);
+
   return state;
 }

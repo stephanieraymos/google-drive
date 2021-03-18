@@ -16,15 +16,15 @@ const Dashboard = () => {
         <AddFolderButton currentFolder={folder} />
         {childFolders.length > 0 && (
           <div className="d-flex flex-wrap">
-            {childFolders.map((childFolder) => {
+            {childFolders.map(childFolder => (
               <div
                 key={folder.id}
                 style={{ maxWidth: "250px" }}
                 className="p-2"
               >
                 <Folder folder={childFolder} />
-              </div>;
-            })}
+              </div>
+            ))}
           </div>
         )}
       </Container>
