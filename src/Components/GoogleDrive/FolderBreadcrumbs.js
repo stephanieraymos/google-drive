@@ -17,7 +17,13 @@ const FolderBreadcrumbs = ({ currentFolder }) => {
           key={folder.id}
           linkAs={Link}
           linkProps={{
-            to: folder.id ? `/folder/${folder.id}` : "/",
+            to: {
+              pathname: folder.id ? `/folder/${folder.id}` : "/",
+              //   Passing state along with route. Current folder doesn't contain path info.
+              //   Path.slice is taking everything from 1st element in array up to the current index, which is root clicked on.
+              //   Only getting elements in path associated with the folder clicked on.
+              state: { folder: { ...folder, path: path.slice(1, index) } },
+            },
           }}
           className="text-truncate d-inline-block"
           style={{ maxWidth: "150px" }}

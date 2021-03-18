@@ -4,12 +4,13 @@ import Navigation from "./Navbar";
 import AddFolderButton from "./AddFolderButton";
 import { useFolder } from "../../Hooks/useFolder";
 import Folder from "./Folder";
-import { useParams } from "react-router-dom";
-import FolderBreadcrumbs from "./FolderBreadcrumbs"
+import { useParams, useLocation } from "react-router-dom";
+import FolderBreadcrumbs from "./FolderBreadcrumbs";
 
 const Dashboard = () => {
   const { folderId } = useParams();
-  const { folder, childFolders } = useFolder(folderId);
+  const { state = {} } = useLocation();
+  const { folder, childFolders } = useFolder(folderId, state.folder);
 
   return (
     <>
