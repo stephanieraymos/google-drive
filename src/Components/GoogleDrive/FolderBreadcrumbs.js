@@ -16,6 +16,9 @@ const FolderBreadcrumbs = ({ currentFolder }) => {
         <Breadcrumb.Item
           key={folder.id}
           linkAs={Link}
+          linkProps={{
+            to: folder.id ? `/folder/${folder.id}` : "/",
+          }}
           className="text-truncate d-inline-block"
           style={{ maxWidth: "150px" }}
         >
