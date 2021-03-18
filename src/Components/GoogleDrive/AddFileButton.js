@@ -37,9 +37,9 @@ const AddFileButton = ({ currentFolder }) => {
       (snapshot) => {
         const progress = snapshot.bytesTransferred / snapshot.totalBytes;
         setUploadingFiles((prevUploadingFiles) => {
-          return prevUploadingFiles.map((file) => {
-            if (uploadingFiles.id === id) {
-              return { ...uploadingFiles, progress: progress };
+          return prevUploadingFiles.map((uploadFile) => {
+            if (uploadFile.id === id) {
+              return { ...uploadFile, progress: progress };
             }
             return uploadFile;
           });
