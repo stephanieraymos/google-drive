@@ -84,7 +84,7 @@ export function useFolder(folderId = null, folder = null) {
   }, [folderId]); //Updating folder vairable from folderId: anytime we pass a new id to the folder
 
   useEffect(() => {
-    database.folders
+    return database.folders
       .where("parentId", "==", folderId)
       .where("userId", "==", currentUser.uid)
       .orderBy("createdAt")
