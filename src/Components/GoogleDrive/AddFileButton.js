@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFileUpload } from "@fortawesome/free-solid-svg-icons";
 import { useAuth } from "../../Context/AuthContext";
@@ -6,11 +6,18 @@ import { storage, database } from "../../firebase";
 import { ROOT_FOLDER } from "../../Hooks/useFolder";
 
 const AddFileButton = ({ currentFolder }) => {
+  const [uploadingFiles, setUploadingFiles] = useState([]);
   const { currentUser } = useAuth();
 
   const handleUpload = (e) => {
     const file = e.target.files[0];
     if (currentFolder == null || file == null) return;
+
+    setUploadingFiles(
+      ...prevUploadingFiles => [
+        ...prevUploadingFiles,
+        { id: id, name: file.name, progress: 0, error: false },
+      ])
 
     const filePath =
       currentFolder === ROOT_FOLDER //If in root folder
@@ -20,7 +27,7 @@ const AddFileButton = ({ currentFolder }) => {
     //Saving upload task to: Root folder called files, new folder for individual user + file path
     const uploadTask = storage
       .ref(`/files/${currentUser.uid}/${filePath}`)
-      .put(file) //Put file inside of this location
+      .put(file); //Put file inside of this location
 
     uploadTask.on(
       "state_changed",
