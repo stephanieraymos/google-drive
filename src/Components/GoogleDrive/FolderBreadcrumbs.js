@@ -3,7 +3,10 @@ import { Breadcrumb } from "react-bootstrap";
 
 const FolderBreadcrumbs = ({ currentFolder }) => {
   return (
-    <Breadcrumb listProps={{ className: "bg-white p-0" }}>
+    <Breadcrumb
+      className="flex-grow-1"
+      listProps={{ className: "bg-white pl-0 m-0"}}
+    >
       {currentFolder && (
         <Breadcrumb.Item
           className="text-truncate d-inline-block"
