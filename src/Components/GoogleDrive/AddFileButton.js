@@ -70,9 +70,12 @@ const AddFileButton = ({ currentFolder }) => {
               maxWidth: "250px",
             }}
           >
-            {uploadingFiles.map((file) => {
+            {uploadingFiles.map((file) => (
               <Toast key={file.id}>
-                <Toast.Header className="text-truncate w100 d-block">
+                <Toast.Header
+                  closeButton={file.error}
+                  className="text-truncate w100 d-block"
+                >
                   {file.name}
                 </Toast.Header>
                 <Toast.Body>
@@ -87,8 +90,8 @@ const AddFileButton = ({ currentFolder }) => {
                     }
                   />
                 </Toast.Body>
-              </Toast>;
-            })}
+              </Toast>
+            ))}
           </div>,
           document.body
         )}
