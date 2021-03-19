@@ -46,7 +46,7 @@ const Dashboard = () => {
                 style={{ maxWidth: "250px" }}
                 className="p-2"
               >
-                <File file={childFiles} />
+                <File file={childFile} />
               </div>
             ))}
           </div>
