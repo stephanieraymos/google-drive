@@ -12,6 +12,8 @@ const File = ({ file }) => {
       <FontAwesomeIcon icon={faFile} className="mr-2" />
       {file.name}
     </a>
+    // @todo Create functionality to delete files
+    // @todo Create functionality to move files to other folders
   );
 };
 
