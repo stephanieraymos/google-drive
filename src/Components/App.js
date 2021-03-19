@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import { AuthProvider } from "../Context/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Profile from "./Authentication/Profile";

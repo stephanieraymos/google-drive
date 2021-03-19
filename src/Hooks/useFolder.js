@@ -1,4 +1,3 @@
-import firebase from "firebase";
 import { useReducer, useEffect } from "react";
 import { database } from "../firebase";
 import { useAuth } from "../Context/AuthContext";
